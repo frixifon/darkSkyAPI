@@ -1,7 +1,7 @@
 :root {
-    --light: rgb(237, 169, 243);
-    --dark: rgb(190, 3, 207);
-    --black: rgb(28, 41, 56); 
+    --light: rgb(251, 204, 204);
+    --dark: rgb(235, 112, 112);
+    --black: rgb(28, 41, 56);
 }
 
 body{
@@ -10,31 +10,30 @@ body{
     font-family: sans-serif;
     color: var(--black);
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
-.location, .temperature{
+.location, .temperature {
     height: 30vh;
     width: 30%;
     display: flex;
     justify-content: space-around;
-    align-content: center;
+    align-items: center;
 }
 
-.temperature{
+.temperature {
     flex-direction: column;
 }
 
-.degree-section{
+.degree-section {
     display: flex;
     align-items: center;
     cursor: pointer;
 }
 
-.degree-section span{
-    margin: 10px;
+.degree-section span {
+    margin:10 px;
     font-size: 1.5rem;
 }
 
