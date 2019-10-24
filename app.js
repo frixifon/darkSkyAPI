@@ -2,11 +2,12 @@ window.addEventListener('load', ()=>{
     let long = 24.7037952;
     let lat = 59.4075648;
 
+
     let temperatureDegree = document.querySelector(".temperature-degree");
-    let temperaturDescription = document.querySelector(".temperature-description");
-    let locationTimezone = document.querySelector(".location-timezone");
-    let degreeSection = document.querySelector(".degree-section");
-    let temperatureSectionSpan = document.querySelector(".degree-section span");
+    let temperatureDescription = document.querySelector(".temperature-description");
+    let locationTimeZone = document.querySelector(".location-timezone");
+    let temperatureSection = document.querySelector(".degree-section");
+    let temperatureSectionSpan= document.querySelector(".degree-section span")
   /*   let long;
     let lat; */
 
@@ -32,25 +33,38 @@ window.addEventListener('load', ()=>{
     
     fetch(api)
     .then(response => {
+        console.log(response);
        return response.json(); 
     })
     .then(data => {
-        const {temperature, summary, icon} = data.currently;
+        const {temperature, summary, icon}= data.currently;
         temperatureDegree.textContent = temperature;
-        temperaturDescription.textContent = summary;
-        locationTimezone.textContent = data.timezone;
-        
-        let celsius = (temperature - 32)* (5/9);
+        temperatureDescription.textContent = summary;
+        locationTimeZone.textContent= data.timezone;
+        console.log("Icon", icon);
+        seticon(icon, document.querySelector(".icon"));
 
-        temperatureSectionSpan.addEventListener("click", () => {
-            if(temperatureSectionSpan.textContent == "F"){
-                temperatureSectionSpan.tetContent = "C";
+        let celsius = (temperature - 32) * (5/9);
+
+        temperatureSection.addEventListener('click',() =>{
+            if(temperatureSectionSpan.textContent === "F"){
+                temperatureSectionSpan.textContent = "C";
                 temperatureDegree.textContent = Math.floor(celsius);
-            }
-            else{
-                temperatureSectionSpan.tetContent = "F";
+            } else{
+                temperatureSectionSpan.textContent = "F";
                 temperatureDegree.textContent = temperature;
             }
         })
+
     })
+
+    function seticon(icon, iconID){
+        const skycons = new Skycons({color: "white"});
+        const currentIcon = icon.replace(/-/g, "_").toUpperCase();
+        skycons.play();
+        return skycons.set(iconID, Skycons[currentIcon]);
+    }
+
+
+
 });
